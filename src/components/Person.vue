@@ -12,11 +12,20 @@
         {{ score }}
       </div>
 
-      <button class="person__calc person__calc--plus" @click="addScore">
+      <button
+        class="person__calc person__calc--plus"
+        @click="addScore"
+        v-touch:touchhold="touchHoldPlusHandler"
+        v-touch:end="endTouch"
+      >
         <img :src="plusImage" class="person__icon" alt="#" />
       </button>
 
-      <button class="person__calc person__calc--minus">
+      <button
+        class="person__calc person__calc--minus"
+        v-touch:touchhold="touchHoldMinusHandler"
+        v-touch:end="endTouch"
+      >
         <img :src="minusImage" class="person__icon" alt="#" />
       </button>
     </div>
@@ -33,13 +42,33 @@ export default {
       image: require('@/assets/1.png'),
       score: 10,
       name: 'Hung',
+      interval: null,
     };
   },
 
   methods: {
     addScore() {
-      const a = prompt('Plus point?');
-      console.log(a);
+      this.score += 1;
+    },
+
+    minusScore() {
+      this.score -= 1;
+    },
+
+    touchHoldPlusHandler() {
+      this.interval = setInterval(() => {
+        this.addScore();
+      }, 100);
+    },
+
+    touchHoldMinusHandler() {
+      this.interval = setInterval(() => {
+        this.minusScore();
+      }, 100);
+    },
+
+    endTouch() {
+      clearInterval(this.interval);
     },
   },
 };
