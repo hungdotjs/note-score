@@ -56,13 +56,15 @@ export default {
       this.score -= 1;
     },
 
-    touchHoldPlusHandler() {
+    touchHoldPlusHandler(event) {
+      event.preventDefault();
       this.interval = setInterval(() => {
         this.addScore();
       }, 100);
     },
 
-    touchHoldMinusHandler() {
+    touchHoldMinusHandler(event) {
+      event.preventDefault();
       this.interval = setInterval(() => {
         this.minusScore();
       }, 100);
@@ -135,7 +137,6 @@ export default {
     border: 2px solid white;
     cursor: pointer;
     font-size: 1em;
-    touch-action: manipulation;
 
     &:hover {
       transform: scale(1.2);
