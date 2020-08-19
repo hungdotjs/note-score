@@ -57,14 +57,12 @@ export default {
     },
 
     touchHoldPlusHandler(event) {
-      event.preventDefault();
       this.interval = setInterval(() => {
         this.addScore();
       }, 100);
     },
 
     touchHoldMinusHandler(event) {
-      event.preventDefault();
       this.interval = setInterval(() => {
         this.minusScore();
       }, 100);
