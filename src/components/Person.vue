@@ -13,21 +13,21 @@
       </div>
 
       <button
-        class="person__calc person__calc--plus disableSave"
+        class="person__calc person__calc--plus "
         @click="addScore"
         v-touch:touchhold="touchHoldPlusHandler"
         v-touch:end="endTouch"
       >
-        <img :src="plusImage" class="person__icon" alt="#" />
+        <img :src="plusImage" class="person__icon disableSave" alt="#" />
       </button>
 
       <button
-        class="person__calc person__calc--minus disableSave"
+        class="person__calc person__calc--minus "
         @click="minusScore"
         v-touch:touchhold="touchHoldMinusHandler"
         v-touch:end="endTouch"
       >
-        <img :src="minusImage" class="person__icon" alt="#" />
+        <img :src="minusImage" class="person__icon disableSave" alt="#" />
       </button>
     </div>
   </div>
@@ -56,13 +56,13 @@ export default {
       this.score -= 1;
     },
 
-    touchHoldPlusHandler(event) {
+    touchHoldPlusHandler() {
       this.interval = setInterval(() => {
         this.addScore();
       }, 100);
     },
 
-    touchHoldMinusHandler(event) {
+    touchHoldMinusHandler() {
       this.interval = setInterval(() => {
         this.minusScore();
       }, 100);
