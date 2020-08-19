@@ -23,6 +23,7 @@
 
       <button
         class="person__calc person__calc--minus"
+        @click="minusScore"
         v-touch:touchhold="touchHoldMinusHandler"
         v-touch:end="endTouch"
       >
@@ -134,6 +135,7 @@ export default {
     border: 2px solid white;
     cursor: pointer;
     font-size: 1em;
+    touch-action: manipulation;
 
     &:hover {
       transform: scale(1.2);
