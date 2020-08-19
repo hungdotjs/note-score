@@ -13,7 +13,7 @@
       </div>
 
       <button
-        class="person__calc person__calc--plus"
+        class="person__calc person__calc--plus disableSave"
         @click="addScore"
         v-touch:touchhold="touchHoldPlusHandler"
         v-touch:end="endTouch"
@@ -22,7 +22,7 @@
       </button>
 
       <button
-        class="person__calc person__calc--minus"
+        class="person__calc person__calc--minus disableSave"
         @click="minusScore"
         v-touch:touchhold="touchHoldMinusHandler"
         v-touch:end="endTouch"
@@ -78,6 +78,11 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .content {
+}
+
+.disableSave {
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
 
 .person {
