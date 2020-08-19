@@ -8,9 +8,17 @@
       </div>
 
       <div class="person__score">
-        <img :src="scoreImage" alt="#" />
+        <img :src="scoreImage" class="person__icon mr4" alt="#" />
         {{ score }}
       </div>
+
+      <button class="person__calc person__calc--plus" @click="addScore">
+        <img :src="plusImage" class="person__icon" alt="#" />
+      </button>
+
+      <button class="person__calc person__calc--minus">
+        <img :src="minusImage" class="person__icon" alt="#" />
+      </button>
     </div>
   </div>
 </template>
@@ -20,10 +28,19 @@ export default {
   data() {
     return {
       scoreImage: require('@/assets/score.svg'),
+      plusImage: require('@/assets/plus.svg'),
+      minusImage: require('@/assets/minus.svg'),
       image: require('@/assets/1.png'),
       score: 10,
       name: 'Hung',
     };
+  },
+
+  methods: {
+    addScore() {
+      const a = prompt('Plus point?');
+      console.log(a);
+    },
   },
 };
 </script>
@@ -42,9 +59,8 @@ export default {
   font-size: 14px;
   overflow: hidden;
 
-  &:hover {
-    transform: scale(1.1);
-    transition: all 0.3s;
+  @media (min-width: 768px) {
+    font-size: 16px;
   }
 
   &__image {
@@ -54,8 +70,8 @@ export default {
 
   &__name {
     position: absolute;
-    top: 16px;
-    right: 16px;
+    top: 1.5em;
+    right: 1.5em;
     display: flex;
     align-items: center;
     padding: 4px 8px;
@@ -67,16 +83,42 @@ export default {
     position: absolute;
     display: flex;
     align-items: center;
-    bottom: 16px;
-    left: 16px;
-    padding: 2px 6px;
+    bottom: 1.5em;
+    left: 1.5em;
+    padding: 2px 10px;
     background: #fff;
     border-radius: 16px;
+  }
 
-    img {
-      width: 24px;
-      height: 24px;
-      margin-right: 8px;
+  &__icon {
+    width: 2em;
+    height: 2em;
+  }
+
+  &__calc {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    background: white;
+    border-radius: 50%;
+    border: 2px solid white;
+    cursor: pointer;
+    font-size: 1em;
+
+    &:hover {
+      transform: scale(1.2);
+      transition: all 0.3s;
+    }
+
+    &--plus {
+      bottom: 1.5em;
+      right: 1.5em;
+    }
+
+    &--minus {
+      bottom: 4.5em;
+      right: 1.5em;
     }
   }
 }

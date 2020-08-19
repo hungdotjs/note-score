@@ -10,8 +10,10 @@
 
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
 * {
   box-sizing: border-box;
+  outline: none;
 }
 
 #app {
@@ -20,6 +22,7 @@
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   overflow-x: hidden;
+  min-height: 90vh;
 }
 
 #nav {
@@ -33,5 +36,13 @@
       color: #42b983;
     }
   }
+}
+
+.mr4 {
+  margin-right: 4px;
+}
+
+.ml8 {
+  margin-left: 8px;
 }
 </style>
