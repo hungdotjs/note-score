@@ -2,7 +2,9 @@
   <div class="home">
     <div class="navbar"></div>
     <div class="content">
-      <Person v-for="person in persons" :key="person" :person="person"></Person>
+      <transition-group name="list">
+        <Person v-for="person in persons" :key="person.id" :person="person"></Person>
+      </transition-group>
     </div>
     <BottomBar class="bottom" @save="addPerson"></BottomBar>
   </div>
@@ -49,5 +51,18 @@ export default {
   top: auto;
   left: 0;
   right: 0;
+}
+
+.list-item {
+  display: inline-block;
+  margin-right: 10px;
+}
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.3s;
+}
+.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(30px);
 }
 </style>

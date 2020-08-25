@@ -12,7 +12,7 @@
     >
       <el-form :model="form">
         <el-form-item label="Name">
-          <el-input v-model="form.name"></el-input>
+          <el-input type="text" v-model="form.name"></el-input>
         </el-form-item>
         <el-form-item label="Score">
           <el-input-number v-model="form.score"></el-input-number>
@@ -42,7 +42,7 @@ export default {
 
     save() {
       this.dialogVisible = false;
-      this.$emit('save', this.form);
+      this.$emit('save', { id: Date.now(), ...this.form });
       this.form = {
         name: '',
         score: 0,
@@ -65,11 +65,11 @@ $backgroundColor: rgb(253, 192, 223);
   position: relative;
   height: $navbar-height;
   width: 100%;
-  padding-left: 35px;
-  padding-right: 35px;
+  padding-left: 16px;
+  padding-right: 16px;
   padding-bottom: 16px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: flex-end;
   border-radius: 25px;
   background-color: transparent;
@@ -86,14 +86,11 @@ $backgroundColor: rgb(253, 192, 223);
   align-items: center;
   overflow: hidden;
   background-color: #181818;
+  border: 5px solid white;
   box-shadow: 0 20px 50px rgba(240, 46, 170, 0.7);
   z-index: 9;
   transition: all 0.3s;
   cursor: pointer;
-
-  &:hover {
-    transform: scale(1.2);
-  }
 }
 
 .circle .plus-icon {
