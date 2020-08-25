@@ -4,12 +4,12 @@
       <img :src="image" alt="#" class="person__image" />
 
       <div class="person__name">
-        {{ name }}
+        {{ person.name }}
       </div>
 
       <div class="person__score">
         <img :src="scoreImage" class="person__icon mr4" alt="#" />
-        {{ score }}
+        {{ person.score }}
       </div>
 
       <button
@@ -35,25 +35,30 @@
 
 <script>
 export default {
+  props: {
+    person: {
+      type: Object,
+      required: true,
+    },
+  },
+
   data() {
     return {
       scoreImage: require('@/assets/score.svg'),
       plusImage: require('@/assets/plus.svg'),
       minusImage: require('@/assets/minus.svg'),
       image: require('@/assets/1.png'),
-      score: 10,
-      name: 'Hung',
       interval: null,
     };
   },
 
   methods: {
     addScore() {
-      this.score += 1;
+      this.person.score += 1;
     },
 
     minusScore() {
-      this.score -= 1;
+      this.person.score -= 1;
     },
 
     touchHoldPlusHandler() {
@@ -77,20 +82,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-.content {
-}
-
-.disableSave {
-  -webkit-user-select: none;
-  -webkit-touch-callout: none;
-}
-
 .person {
   display: inline-block;
   position: relative;
   width: 50%;
   padding: 4px 8px;
-  border-radius: 8px;
+  border-radius: 16px;
   font-size: 14px;
   overflow: hidden;
 
@@ -100,7 +97,7 @@ export default {
 
   &__image {
     width: 100%;
-    border-radius: 8px;
+    border-radius: 16px;
   }
 
   &__name {
