@@ -1,5 +1,5 @@
 <template>
-  <div class="person">
+  <div class="person disableSave">
     <div class="content">
       <img :src="image" alt="#" class="person__image" />
 
@@ -82,6 +82,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.disableSave {
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
 .person {
   display: inline-block;
   position: relative;

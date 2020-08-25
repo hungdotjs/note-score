@@ -14,8 +14,7 @@
   box-sizing: border-box;
   outline: none;
   touch-action: manipulation;
-  -webkit-user-select: none;
-  -webkit-touch-callout: none;
+
 }
 
 #app {
