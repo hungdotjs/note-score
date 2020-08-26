@@ -1,14 +1,14 @@
 <template>
   <div class="person disableSave">
     <div class="content">
-      <img :src="image" alt="#" class="person__image" />
+      <img :src="getPic(image)" alt="#" class="person__image" />
 
       <div class="person__name">
         {{ person.name }}
       </div>
 
       <div class="person__score">
-        <img :src="scoreImage" class="person__icon mr4" alt="#" />
+        <!-- <i class="fas fa-dragon mr-8"></i> -->
         {{ person.score }}
       </div>
 
@@ -40,6 +40,11 @@ export default {
       type: Object,
       required: true,
     },
+
+    image: {
+      type: Number,
+      default: 1,
+    },
   },
 
   data() {
@@ -47,12 +52,16 @@ export default {
       scoreImage: require('@/assets/score.svg'),
       plusImage: require('@/assets/plus.svg'),
       minusImage: require('@/assets/minus.svg'),
-      image: require('@/assets/1.png'),
       interval: null,
     };
   },
 
   methods: {
+    getPic(image) {
+      // eslint-disable-next-line import/no-dynamic-require
+      return require(`@/assets/img/${image}.gif`);
+    },
+
     addScore() {
       this.person.score += 1;
     },
@@ -87,32 +96,46 @@ export default {
   -webkit-touch-callout: none;
 }
 
+.content {
+  width: 100%;
+  height: 100%;
+}
+
 .person {
-  display: inline-block;
   position: relative;
-  width: 50%;
-  padding: 4px 8px;
+  width: 100%;
+  height: 200px;
   border-radius: 16px;
-  font-size: 14px;
+  font-size: 16px;
+  margin-bottom: 16px;
   overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 
   @media (min-width: 768px) {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   &__image {
+    position: relative;
     width: 100%;
+    height: auto;
+    max-height: 100%;
+    object-fit: none;
     border-radius: 16px;
   }
 
   &__name {
+    font-size: 1.2em;
+    text-transform: uppercase;
     position: absolute;
-    top: 1.5em;
-    right: 1.5em;
+    top: 1em;
+    right: 1em;
     display: flex;
     align-items: center;
-    padding: 4px 8px;
-    background: #fff;
+    padding: 2px 12px;
+    background: #000;
+    color: white;
+    border: 3px solid white;
     border-radius: 16px;
   }
 
@@ -120,10 +143,15 @@ export default {
     position: absolute;
     display: flex;
     align-items: center;
-    bottom: 1.5em;
-    left: 1.5em;
-    padding: 2px 10px;
-    background: #fff;
+    bottom: 1em;
+    left: 1em;
+    top: auto;
+    right: auto;
+    font-size: 1.2em;
+    padding: 2px 12px;
+    background: #000;
+    color: white;
+    border: 3px solid white;
     border-radius: 16px;
   }
 
@@ -137,8 +165,8 @@ export default {
     display: flex;
     align-items: center;
     padding: 0;
-    background: white;
     border-radius: 50%;
+    background: white;
     border: 2px solid white;
     cursor: pointer;
     font-size: 1em;
@@ -149,13 +177,13 @@ export default {
     }
 
     &--plus {
-      bottom: 1.5em;
-      right: 1.5em;
+      bottom: 1em;
+      right: 1em;
     }
 
     &--minus {
-      bottom: 4.5em;
-      right: 1.5em;
+      bottom: 4em;
+      right: 1em;
     }
   }
 }

@@ -1,9 +1,13 @@
 <template>
   <div class="home">
-    <div class="navbar"></div>
     <div class="content">
       <transition-group name="list">
-        <Person v-for="person in persons" :key="person.id" :person="person"></Person>
+        <Person
+          v-for="(person, index) in persons"
+          :key="person.id"
+          :person="person"
+          :image="index"
+        ></Person>
       </transition-group>
     </div>
     <BottomBar class="bottom" @save="addPerson"></BottomBar>
@@ -43,6 +47,7 @@ export default {
 
 .home {
   position: relative;
+  padding: 16px;
 }
 
 .bottom {

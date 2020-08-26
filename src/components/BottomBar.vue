@@ -3,23 +3,6 @@
     <div class="circle" @click="openCreate">
       <i class="fas fa-plus plus-icon"></i>
     </div>
-
-    <el-dialog
-      title="Create new player"
-      :visible.sync="dialogVisible"
-      :append-to-body="true"
-      width="90%"
-    >
-      <el-form :model="form">
-        <el-form-item label="Name">
-          <el-input type="text" v-model="form.name"></el-input>
-        </el-form-item>
-        <el-form-item label="Score">
-          <el-input-number v-model="form.score"></el-input-number>
-        </el-form-item>
-      </el-form>
-      <el-button type="success" class="w-100" @click="save">Save</el-button>
-    </el-dialog>
   </div>
 </template>
 
@@ -37,11 +20,21 @@ export default {
 
   methods: {
     openCreate() {
-      this.dialogVisible = true;
+      this.$prompt('Name', 'Create', {
+        confirmButtonText: 'OK',
+        cancelButtonText: 'Cancel',
+        customClass: 'w-75',
+        inputValidator(value) {
+          return !!value && true;
+        },
+        inputErrorMessage: 'Name cannot be blank',
+      }).then(({ value }) => {
+        this.form.name = value;
+        this.save();
+      });
     },
 
     save() {
-      this.dialogVisible = false;
       this.$emit('save', { id: Date.now(), ...this.form });
       this.form = {
         name: '',
@@ -55,11 +48,6 @@ export default {
 <style lang="scss" scoped>
 $navbar-height: 50px;
 $circle-radius: 60px;
-$backgroundColor: rgb(253, 192, 223);
-
-.w-100 {
-  width: 100%;
-}
 
 .navbar {
   position: relative;
@@ -91,6 +79,10 @@ $backgroundColor: rgb(253, 192, 223);
   z-index: 9;
   transition: all 0.3s;
   cursor: pointer;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 }
 
 .circle .plus-icon {

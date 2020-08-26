@@ -1,49 +1,57 @@
 <template>
   <div id="app">
+    <div class="navbar">
+      TITEDDY
+    </div>
     <router-view />
   </div>
 </template>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+@font-face {
+  font-family: Arciform;
+  src: url('./assets/fonts/Arciform.otf');
+}
 
-* {
-  font-family: 'Fredoka One', cursive, Avenir, Helvetica, Arial, sans-serif;
+html {
+  font-family: Arciform, cursive, Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+}
+
+* {
+  font-weight: bold;
   box-sizing: border-box;
   outline: none;
   touch-action: manipulation;
-
 }
 
 #app {
-  font-family: 'Fredoka One', cursive, Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   overflow-x: hidden;
   min-height: 90vh;
 }
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.navbar {
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
 }
 
-.mr4 {
-  margin-right: 4px;
+.w-100 {
+  width: 100% !important;
 }
 
-.ml8 {
-  margin-left: 8px;
+.w-75 {
+  width: 75% !important;
+}
+
+.mr-8 {
+  margin-right: 8px;
 }
 </style>
