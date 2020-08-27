@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import { MessageBox } from 'element-ui';
+
 export default {
   data() {
     return {
@@ -18,7 +20,7 @@ export default {
 
   methods: {
     openCreate() {
-      this.$prompt('Name', 'Create', {
+      MessageBox.prompt('Name', 'Create', {
         confirmButtonText: 'OK',
         cancelButtonText: 'Cancel',
         customClass: 'w-75',
@@ -33,7 +35,7 @@ export default {
     },
 
     save() {
-      this.$emit('save', { id: Date.now(), ...this.form });
+      this.$emit('save', this.form);
       this.form = {
         name: '',
         score: 0,

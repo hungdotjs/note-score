@@ -1,14 +1,15 @@
 <template>
   <div class="person disableSave">
     <div class="content">
-      <img :src="getPic(image)" alt="#" class="person__image" />
+      <img :src="getPic(person.id)" alt="#" class="person__image" />
+
+      <img :src="crownImage" alt="#" class="person__crown" v-if="hasCrown" />
 
       <div class="person__name">
         {{ person.name }}
       </div>
 
       <div class="person__score">
-        <!-- <i class="fas fa-dragon mr-8"></i> -->
         {{ person.score }}
       </div>
 
@@ -41,18 +42,20 @@ export default {
       required: true,
     },
 
-    image: {
-      type: Number,
-      default: 1,
+    hasCrown: {
+      type: Boolean,
+      default: false,
     },
   },
 
   data() {
     return {
-      scoreImage: require('@/assets/score.svg'),
       plusImage: require('@/assets/plus.svg'),
       minusImage: require('@/assets/minus.svg'),
+      crownImage: require('@/assets/medal.svg'),
+
       interval: null,
+      avatar: '',
     };
   },
 
@@ -64,10 +67,12 @@ export default {
 
     addScore() {
       this.person.score += 1;
+      this.$emit('change', this.person);
     },
 
     minusScore() {
       this.person.score -= 1;
+      this.$emit('change', this.person);
     },
 
     touchHoldPlusHandler() {
@@ -108,11 +113,18 @@ export default {
   border-radius: 16px;
   font-size: 16px;
   margin-bottom: 16px;
-  overflow: hidden;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 
   @media (min-width: 768px) {
     font-size: 18px;
+  }
+
+  &__crown {
+    position: absolute;
+    top: -10px;
+    left: -20px;
+    width: 64px;
+    height: 64px;
   }
 
   &__image {

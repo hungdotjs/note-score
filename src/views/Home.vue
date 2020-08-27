@@ -1,12 +1,13 @@
 <template>
   <div class="home">
     <div class="content">
-      <transition-group name="list">
+      <transition-group name="flip-list">
         <Person
-          v-for="(person, index) in persons"
+          v-for="person in data"
           :key="person.id"
           :person="person"
-          :image="index"
+          :hasCrown="person.id === top1"
+          @change="handleChange"
         ></Person>
       </transition-group>
     </div>
@@ -18,6 +19,7 @@
 // @ is an alias to /src
 import Person from '@/components/Person.vue';
 import BottomBar from '@/components/BottomBar.vue';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'Home',
@@ -27,14 +29,31 @@ export default {
   },
 
   data() {
-    return {
-      persons: [],
-    };
+    return {};
+  },
+
+  computed: {
+    ...mapGetters({
+      data: 'person',
+    }),
+
+    top1() {
+      return this.data[0].id || 0;
+    },
   },
 
   methods: {
     addPerson(person) {
-      this.persons.push(person);
+      const input = {
+        id: this.data.length,
+        ...person,
+      };
+      this.data.push(input);
+      this.$store.dispatch('updatePerson', this.data);
+    },
+
+    handleChange(payload) {
+      this.$store.dispatch('adjustScore', payload);
     },
   },
 };
@@ -48,7 +67,7 @@ export default {
 
 .home {
   position: relative;
-  padding: 16px;
+  padding: 16px 32px;
 }
 
 .bottom {
@@ -59,16 +78,7 @@ export default {
   right: 16px;
 }
 
-.list-item {
-  display: inline-block;
-  margin-right: 10px;
-}
-.list-enter-active,
-.list-leave-active {
-  transition: all 0.3s;
-}
-.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
-  opacity: 0;
-  transform: translateY(30px);
+.flip-list-move {
+  transition: transform 1s;
 }
 </style>

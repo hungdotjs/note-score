@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="navbar">
-      TITEDDY
+      TiTeddy
     </div>
     <router-view />
   </div>
@@ -20,8 +20,8 @@ html {
 }
 
 body {
-  min-height: 100vh;
   margin: 0;
+  margin-top: 70px;
   // background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
   background-color: white;
   background-repeat: no-repeat;
@@ -37,11 +37,11 @@ body {
 
 #app {
   overflow-x: hidden;
-  min-height: 90vh;
+  min-height: 80vh;
 }
 
 .navbar {
-  position: sticky;
+  position: fixed;
   top: 0;
   right: 0;
   left: 0;
@@ -49,6 +49,8 @@ body {
   text-align: center;
   font-size: 32px;
   font-weight: bold;
+  text-decoration: underline;
+  background: #fff;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   z-index: 1000;
 }
