@@ -59,7 +59,7 @@ export default {
   methods: {
     getPic(image) {
       // eslint-disable-next-line import/no-dynamic-require
-      return require(`@/assets/img/${image}.gif`);
+      return require(`@/assets/img/${image}.jpg`);
     },
 
     addScore() {
@@ -120,12 +120,12 @@ export default {
     width: 100%;
     height: auto;
     max-height: 100%;
-    object-fit: none;
+    object-fit: cover;
     border-radius: 16px;
   }
 
   &__name {
-    font-size: 1.2em;
+    font-size: 1em;
     text-transform: uppercase;
     position: absolute;
     top: 1em;

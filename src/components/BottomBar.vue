@@ -1,8 +1,6 @@
 <template>
-  <div class="navbar">
-    <div class="circle" @click="openCreate">
-      <i class="fas fa-plus plus-icon"></i>
-    </div>
+  <div class="circle" @click="openCreate">
+    <i class="fas fa-plus plus-icon"></i>
   </div>
 </template>
 
@@ -48,20 +46,6 @@ export default {
 <style lang="scss" scoped>
 $navbar-height: 50px;
 $circle-radius: 60px;
-
-.navbar {
-  position: relative;
-  height: $navbar-height;
-  width: 100%;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-bottom: 16px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  border-radius: 25px;
-  background-color: transparent;
-}
 
 .circle {
   margin-bottom: 0;

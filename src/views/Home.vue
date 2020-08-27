@@ -43,6 +43,7 @@ export default {
 <style lang="scss" scoped>
 .content {
   width: 100%;
+  padding-bottom: 50px;
 }
 
 .home {
@@ -52,10 +53,10 @@ export default {
 
 .bottom {
   position: fixed;
-  bottom: 0;
+  bottom: 16px;
   top: auto;
-  left: 0;
-  right: 0;
+  left: auto;
+  right: 16px;
 }
 
 .list-item {

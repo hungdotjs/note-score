@@ -20,7 +20,12 @@ html {
 }
 
 body {
+  min-height: 100vh;
   margin: 0;
+  // background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+  background-color: white;
+  background-repeat: no-repeat;
+  color: black;
 }
 
 * {
@@ -31,16 +36,21 @@ body {
 }
 
 #app {
-  color: #2c3e50;
   overflow-x: hidden;
   min-height: 90vh;
 }
 
 .navbar {
+  position: sticky;
+  top: 0;
+  right: 0;
+  left: 0;
   padding: 16px 32px;
   text-align: center;
   font-size: 32px;
   font-weight: bold;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  z-index: 1000;
 }
 
 .w-100 {
