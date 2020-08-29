@@ -3,11 +3,12 @@
     <div class="content">
       <transition-group name="flip-list">
         <Person
-          v-for="person in data"
+          v-for="(person, index) in data"
           :key="person.id"
           :person="person"
           :hasCrown="person.id === top1"
           @change="handleChange"
+          @remove="remove(index)"
         ></Person>
       </transition-group>
     </div>
@@ -54,6 +55,11 @@ export default {
 
     handleChange(payload) {
       this.$store.dispatch('adjustScore', payload);
+    },
+
+    remove(index) {
+      this.data.splice(index, 1);
+      this.$store.dispatch('updatePerson', this.data);
     },
   },
 };
