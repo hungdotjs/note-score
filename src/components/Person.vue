@@ -13,21 +13,11 @@
         {{ person.score }}
       </div>
 
-      <button
-        class="person__calc person__calc--plus "
-        @click="addScore"
-        v-touch:touchhold="touchHoldPlusHandler"
-        v-touch:end="endTouch"
-      >
+      <button class="person__calc person__calc--plus " @click="addScore">
         <img :src="plusImage" class="person__icon disableSave" alt="#" />
       </button>
 
-      <button
-        class="person__calc person__calc--minus "
-        @click="minusScore"
-        v-touch:touchhold="touchHoldMinusHandler"
-        v-touch:end="endTouch"
-      >
+      <button class="person__calc person__calc--minus " @click="remove">
         <img :src="minusImage" class="person__icon disableSave" alt="#" />
       </button>
     </div>
@@ -35,6 +25,8 @@
 </template>
 
 <script>
+import { MessageBox } from 'element-ui';
+
 export default {
   props: {
     person: {
@@ -61,18 +53,38 @@ export default {
 
   methods: {
     getPic(image) {
+      if (image > 5) return require('@/assets/img/0.jpg');
       // eslint-disable-next-line import/no-dynamic-require
       return require(`@/assets/img/${image}.jpg`);
     },
 
-    addScore() {
-      this.person.score += 1;
-      this.$emit('change', this.person);
+    remove() {
+      this.$confirm('This will permanently delete. Continue?', 'Warning', {
+        confirmButtonText: 'OK',
+        cancelButtonText: 'Cancel',
+        type: 'warning',
+      }).then(() => {
+        this.$message({
+          type: 'success',
+          message: 'Delete completed',
+        });
+        this.$emit('remove');
+      });
     },
 
-    minusScore() {
-      this.person.score -= 1;
-      this.$emit('change', this.person);
+    addScore() {
+      MessageBox.prompt('Plus/Minus score', {
+        confirmButtonText: 'OK',
+        cancelButtonText: 'Cancel',
+        customClass: 'w-75',
+        inputValidator(value) {
+          return !!value && true;
+        },
+        inputErrorMessage: 'Score cannot be blank',
+      }).then(({ value }) => {
+        this.person.score += parseFloat(value);
+        this.$emit('change', this.person);
+      });
     },
 
     touchHoldPlusHandler() {
@@ -137,14 +149,14 @@ export default {
   }
 
   &__name {
-    font-size: 1em;
+    font-size: 1.3em;
     text-transform: uppercase;
     position: absolute;
-    top: 1em;
+    bottom: 3.5em;
     right: 1em;
     display: flex;
     align-items: center;
-    padding: 2px 12px;
+    padding: 2px 16px;
     background: #000;
     color: white;
     border: 3px solid white;
@@ -194,7 +206,7 @@ export default {
     }
 
     &--minus {
-      bottom: 4em;
+      top: 1em;
       right: 1em;
     }
   }
